@@ -2,43 +2,44 @@ const { expect } = require('chai');
 const { calcularIMC } = require('../src/imc');
 
 describe('Calculadora de IMC', () => {
+  it('Calcula o IMC corretamente e categoriza como "Peso normal"', () => {
+    const peso = 70; // 70 kg
+    const altura = 175; // 175 cm
 
-it('Calculadora deve rodar tranquilo', () => {
-    const peso = 80; // 80 kg
-    const altura = 180; // 180 cm
+    const IMCResult = calcularIMC(peso, altura);
 
-    const IMEsperado = (peso / Math.pow(altura / 100, 2)).toFixed(2);
-    const IMCCalculado = calcularIMC(peso, altura);
+    // Verifica se a string de resultado inclui o valor do IMC e a categoria
+    expect(IMCResult).to.equal('Seu IMC é 22.86 (Peso normal)');
+  });
 
-    expect(IMCCalculado).to.equal(IMEsperado);
-});
+  it('Categoriza como "Obesidade Grau II"', () => {
+    const peso = 100; // 100 kg
+    const altura = 165; // 165 cm
+
+    const IMCResult = calcularIMC(peso, altura);
+
+    // Verifica se a string de resultado inclui o valor do IMC e a categoria
+    expect(IMCResult).to.equal('Seu IMC é 36.73 (Obeso)');
+  });
+
+  it('Categoriza como "Abaixo do peso"', () => {
+    const peso = 50; // 50 kg
+    const altura = 170; // 170 cm
+
+    const IMCResult = calcularIMC(peso, altura);
+
+    // Verifica se a string de resultado inclui o valor do IMC e a categoria
+    expect(IMCResult).to.equal('Seu IMC é 17.30 (Abaixo do peso)');
+  });
 
 
-
-it('altura = 0, entrada inadequada', () => {
+  it('Altura = 0, entrada inadequada', () => {
     const peso = 70; // 70 kg
     const altura = 0; // 0 cm
 
-    const IMCCalculado = calcularIMC(peso, altura);
+    const IMCResult = calcularIMC(peso, altura);
 
-    expect(IMCCalculado).to.equal('NaN');
-});
-});
-
-it('IMC abaixo do peso', () => {
-    const peso = 50; // 50 kg
-    const altura = 160; // 160 cm
-
-    const IMCCalculado = calcularIMC(peso, altura);
-
-    expect(IMCCalculado).to.equal('Seu IMC é 19.53 (Abaixo do peso)');
-});
-
-it('IMC obeso', () => {
-    const peso = 100; // 100 kg
-    const altura = 170; // 170 cm
-
-    const IMCCalculado = calcularIMC(peso, altura);
-
-    expect(IMCCalculado).to.equal('Seu IMC é 34.60 (Obeso)');
+   
+    expect(IMCResult).to.equal('NaN');
+  });
 });
